@@ -50,6 +50,11 @@ class Chef
             Chef::Log.error("Cannot find filterdiff. Please install patchutils to be able to use patches.")
             raise "Cannot find filterdiff. Please install patchutils to be able to use patches."
           end
+          c = "curl -fsSL #{patch} | filterdiff -x ChangeLog | #{rbenv_bin_path}/rbenv #{cmd}"
+          o = Chef::Mixin::DeepMerge.deep_merge!(options, default_options)
+          puts "********************* COMMAND: " + c
+          puts "********************* opts: " + o
+
           shell_out("curl -fsSL #{patch} | filterdiff -x ChangeLog | #{rbenv_bin_path}/rbenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
         else
           shell_out("#{rbenv_bin_path}/rbenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
