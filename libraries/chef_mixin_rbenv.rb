@@ -53,7 +53,7 @@ class Chef
           c = "curl -fsSL #{patch} | filterdiff -x ChangeLog | #{rbenv_bin_path}/rbenv #{cmd}"
           o = Chef::Mixin::DeepMerge.deep_merge!(options, default_options)
           puts "********************* COMMAND: " + c
-          puts "********************* opts: " + o
+          puts "********************* opts: " + o.to_s
 
           shell_out("curl -fsSL #{patch} | filterdiff -x ChangeLog | #{rbenv_bin_path}/rbenv #{cmd}", Chef::Mixin::DeepMerge.deep_merge!(options, default_options))
         else
